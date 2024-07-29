@@ -1,5 +1,6 @@
 p/
 badger-test*/
 .idea/
+.maelstrom-go-test
 
 vendor

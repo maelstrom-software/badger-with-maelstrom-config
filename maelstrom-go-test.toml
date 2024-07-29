@@ -1,0 +1,17 @@
+# Provide /tmp, /proc, /sys, and some devices in /dev/.
+[[directives]]
+enable_writable_file_system = true
+layers = [
+    { stubs = [ "/{proc,sys,tmp}/", "/dev/{full,null,random,urandom,zero}" ] },
+]
+mounts = [
+    { type = "tmp", mount_point = "/tmp" },
+    { type = "proc", mount_point = "/proc" },
+    { type = "sys", mount_point = "/sys" },
+    { type = "devices", devices = ["full", "null", "random", "urandom", "zero"] },
+]
+
+# This compiles protobufs with `protoc` and we don't have a good container.
+[[directives]]
+filter = "package.equals(github.com/dgraph-io/badger/v4/pb)"
+ignore = true
